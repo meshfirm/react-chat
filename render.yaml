@@ -22,8 +22,3 @@ services:
       - key: REACT_APP_BACKEND_URL
         value: https://my-app-backend.onrender.com
       - fromGroup: firebase
-
-routes:
-  - type: rewrite
-    source: /<*>*
-    destination: /index.html
