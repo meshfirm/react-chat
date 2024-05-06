@@ -9,6 +9,8 @@ services:
     envVars:
       - key: NODE_ENV
         value: production
+      - key: PORT
+        value: 443
       - fromGroup: openai
 
 
@@ -18,7 +20,7 @@ services:
     name: react-chat-frontend
     region: frankfurt
     buildCommand: cd client && npm install && npm run build
-    startCommand: npm start
+    startCommand: cd client && npm start
     envVars:
       - key: REACT_APP_BACKEND_URL
         value: https://my-app-backend.onrender.com
