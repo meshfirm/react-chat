@@ -7,9 +7,7 @@ const cors = require("cors");
 // Initialize express app
 const app = express();
 const port = process.env.PORT || 4000; // Use the PORT environment variable if available
-app.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
-});
+
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY, // This is also the default, can be omitted
