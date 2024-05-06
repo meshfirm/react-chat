@@ -17,7 +17,7 @@ services:
     name: react-chat-frontend
     region: frankfurt
     buildCommand: cd client && npm install && npm run build
-    staticPublishPath: client/build
+    startCommand: npm start
     envVars:
       - key: REACT_APP_BACKEND_URL
         value: https://my-app-backend.onrender.com
