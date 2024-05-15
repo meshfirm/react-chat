@@ -11,3 +11,114 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.sidebar {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: rgb(220, 232, 245);
+  padding: 25px 15px;
+  border-radius: 20px;
+  overflow-y: auto;
+}
+
+.sidebar img {
+  width: 25px;
+}
+
+.sidebar .menu {
+  display: block;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.sidebar .new-chat {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 15px;
+  background-color: rgb(208, 234, 243);
+  border-radius: 50px;
+  font-size: 14px;
+  color: gray;
+  cursor: pointer;
+}
+
+.sidebar .recent {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Hide overflow for recent items */
+  animation: fadeIn 1.5s;
+}
+
+.sidebar .recent-title {
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.sidebar .recent-entry {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 50px;
+  color: rgb(37, 52, 66);
+  cursor: pointer;
+}
+
+.sidebar .recent-entry:hover {
+  background-color: rgb(155, 219, 241);
+}
+
+/* Adjust the max-height for recent entries when extended is false */
+.sidebar .recent.collapsed {
+  max-height: calc(65px + 20px); /* Height for 5 entries + padding */
+  overflow: auto;
+}
+
+/* Show more button style */
+.sidebar .show-more {
+  cursor: pointer;
+  color: gray;
+  text-align: center;
+  padding: 10px;
+  border-top: 1px solid rgb(37, 52, 66);
+  margin-top: 10px;
+  background-color: rgb(208, 234, 243);
+  border-radius: 0 0 20px 20px;
+}
+
+.sidebar .bottom {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar .bottom-item {
+  padding-right: 10px;
+  cursor: pointer;
+}
+
+.avater {
+  width: 70%;
+  border-radius: 80%;
+}
+
+@media (max-width: 600px) {
+  .sidebar {
+      padding: 5px 5px;
+      background-color: white;
+  }
+
+  .sidebar .new-chat {
+      padding: 5px;
+  }
+
+  .sidebar .recent-entry {
+      padding: 10px 5px;
+  }
+
+  .sidebar .show-more {
+      padding: 5px;
+  }
+}
