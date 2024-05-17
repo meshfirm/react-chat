@@ -5,8 +5,7 @@ const IntroSection = () => {
   return (
     <div id="introsection">
       <h1>
-        Introducing Talkbot
-        <BotResponse response=" - The Ultimate AI Assistant" />
+        <BotResponse response="Introducing Copilot" />
       </h1>
       <h2>
         A cutting-edge AI-powered app that provides instant answers to any
@@ -17,10 +16,6 @@ const IntroSection = () => {
       Features:
       <ul>
         <li>Instant answers to any question</li>
-        <li>Deep learning technology that improves with usage</li>
-        <li>Continuously Learning</li>
-        <li>User-friendly interface</li>
-        <li>Available 24/7</li>
       </ul>
       <p>
         Say goodbye to endless searching and typing, and say hello to TalkBot,

@@ -1,6 +1,6 @@
 import React from "react";
 import NavLinks from "./NavLink";
-import BuyMeACoffeeButton from "./BuyMeACoffeeButton";
+
 
 const NavLinksContainer = ({ chatLog, setChatLog }) => {
   return (
@@ -53,7 +53,7 @@ const NavLinksContainer = ({ chatLog, setChatLog }) => {
           setChatLog={setChatLog}
         />
       )}
-      <NavLinks
+{/*       <NavLinks
         svg={
           <svg
             viewBox="0 0 24 24"
@@ -75,7 +75,7 @@ const NavLinksContainer = ({ chatLog, setChatLog }) => {
         }
         text="OpenAI Discord"
         link="https://discord.com/invite/openai"
-      />
+      /> */}
       <NavLinks
         svg={
           <svg
@@ -119,7 +119,7 @@ const NavLinksContainer = ({ chatLog, setChatLog }) => {
         text="Log out"
         link=""
       />
-      <BuyMeACoffeeButton />
+      
     </div>
   );
 };
