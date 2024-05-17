@@ -22,6 +22,7 @@ const IntroSection = () => {
         your personal AI assistant. Try it now and see for yourself how TalkBot
         can make your life easier.
       </p>
+      <img src="/mesh_logo.png" alt="Mesh Logo" style={{ width: "10%" }} />
     </div>
   );
 };

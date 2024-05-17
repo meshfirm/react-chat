@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../firebase.config"; // Adjust the import path as necessary
 import Avatar from "../components/Avatar";
 import BotResponse from "../components/BotResponse";
 import Error from "../components/Error";
@@ -12,6 +14,7 @@ const Home = () => {
   const [chatLog, setChatLog] = useState([]);
   const [err, setErr] = useState(false);
   const [responseFromAPI, setResponseFromAPI] = useState(false);
+  const [user] = useAuthState(auth); // Get the current user
 
   const chatLogEndRef = useRef(null);
 
@@ -27,6 +30,8 @@ const Home = () => {
 
       try {
         const backendUrl = process.env.REACT_APP_BACKEND_URL || "https://react-chat-backend-xquc.onrender.com";
+        const conversationId = chatLog.length > 0 ? chatLog[0].chatId : new Date().getTime().toString();
+        const userHandle = user ? user.uid : "anonymous"; // Use user UID or "anonymous" if not logged in
 
         const response = await fetch(`${backendUrl}/respond`, {
           method: "POST",
