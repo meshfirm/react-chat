@@ -1,39 +1,72 @@
 require("dotenv").config();
-const { OpenAI } = require("openai");
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+let fetch;
+
+(async () => {
+  fetch = (await import('node-fetch')).default;
+})();
+
+// The rest of your server code here
 
 // Initialize express app
 const app = express();
-const port = process.env.PORT || 4000; // Use the PORT environment variable if available
+const port = process.env.PORT || 4000;
 
-
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY, // This is also the default, can be omitted
-});
 // Middleware
 app.use(bodyParser.json());
 app.use(cors());
 
+// Function to query Flowise
+async function queryFlowise(data) {
+    const response = await fetch(
+        "https://copilot-flowise.onrender.com/api/v1/prediction/83ab39b8-dbf8-494f-8be7-8a4ed82f0c34",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        }
+    );
+    const result = await response.json();
+    return result;
+}
+
+// Route to handle POST requests
+// Route to handle POST requests
 // Route to handle POST requests
 app.post("/respond", async (req, res) => {
   try {
     const { message } = req.body;
     console.log("MESSAGE: ", message);
-    const chatCompletion = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
-      messages: [{ role: "user", content: message }],
-    });
+    const flowiseResponse = await queryFlowise({ question: message });
 
-    console.log("PASSED");
-    console.log("OpenAI Response:", chatCompletion.choices[0].message.content);
+    console.log("Flowise Response:", flowiseResponse);
+    // Extract relevant data from the Flowise response
+    const botResponse = {
+      text: flowiseResponse.text,
+      chatId: flowiseResponse.chatId,
+      chatMessageId: flowiseResponse.chatMessageId,
+      sessionId: flowiseResponse.sessionId,
+      memoryType: flowiseResponse.memoryType,
+      sourceDocuments: flowiseResponse.sourceDocuments ? flowiseResponse.sourceDocuments.map(doc => ({
+        pageContent: doc.pageContent,
+        metadata: doc.metadata // Assuming you want to send this as is or further process it
+      })) : [],
+      usedTools: flowiseResponse.usedTools ? flowiseResponse.usedTools.map(tool => ({
+        tool: tool.tool,
+        toolInput: tool.toolInput, // You might need to handle this object depending on its structure
+        toolOutput: tool.toolOutput
+      })) : []
+    };
 
-    // Send the ChatGPT response back to the client
-    res.json({ botResponse: chatCompletion.choices[0].message.content });
+    // Send the formatted response back to the client
+    res.json({ botResponse });
   } catch (error) {
-    console.error("Error calling OpenAI:", error);
-    res.status(500).json({ error: "Failed to generate response from OpenAI" });
+    console.error("Error calling Flowise:", error);
+    res.status(500).json({ error: "Failed to generate response from Flowise" });
   }
 });
 

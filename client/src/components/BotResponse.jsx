@@ -1,30 +1,31 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const BotResponse = ({ response, chatLogRef }) => {
-  const [botResoponse, setBotResponse] = useState("");
+  const [botResponse, setBotResponse] = useState("");
   const [isPrinting, setIsPrinting] = useState(true);
   const [isButtonVisible, setIsButtonVisible] = useState(false);
 
   useEffect(() => {
+    if (!response || !response.text) {
+      return;
+    }
+
     let index = 1;
     let msg = setInterval(() => {
-      if (response !== " - The Ultimate AI Assistant") {
+      if (response.text !== " - The Ultimate AI Assistant") {
         setIsButtonVisible(true);
       }
       if (!isPrinting) {
-        // if isPrinting is false, clear interval and return
         clearInterval(msg);
         return;
       }
-      setBotResponse(response.slice(0, index));
-      if (index >= response.length) {
+      setBotResponse(response.text.slice(0, index));
+      if (index >= response.text.length) {
         clearInterval(msg);
         setIsButtonVisible(false);
       }
       index++;
 
-      // scroll to the bottom of the page whenever the messages array is updated
       if (chatLogRef !== undefined) {
         chatLogRef.current.scrollIntoView({
           behavior: "smooth",
@@ -32,7 +33,7 @@ const BotResponse = ({ response, chatLogRef }) => {
         });
       }
     }, 50);
-    return () => clearInterval(msg); // clear interval on component unmount
+    return () => clearInterval(msg);
   }, [chatLogRef, response, isPrinting]);
 
   const stopPrinting = () => setIsPrinting(!isPrinting);
@@ -40,11 +41,11 @@ const BotResponse = ({ response, chatLogRef }) => {
   return (
     <>
       <pre>
-        {botResoponse}
-        {botResoponse === response ? "" : "|"}
+        {botResponse}
+        {botResponse === response.text ? "" : "|"}
       </pre>
       {isButtonVisible && (
-        <button className="stop-messgage" onClick={stopPrinting}>
+        <button className="stop-message" onClick={stopPrinting}>
           {isPrinting ? "Stop Message" : "Regenerate Message"}
         </button>
       )}
