@@ -298,10 +298,10 @@ nav svg {
 form button {
   background: #ededed;
   border: none;
-  position: absolute;
+  
   top: 20%;
   right: 15px;
-  width: 35px;
+
   height: 45px;
 }
 
@@ -433,4 +433,31 @@ form button {
   #loginButton {
     font-size: 22px;
   }
+}
+
+.navLinks {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10px;
+}
+
+.navPrompt {
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+  text-decoration: none;
+  color: var(--primary-text-color);
+  margin-bottom: 10px;
+}
+
+.navPrompt svg {
+  width: 20px;
+  height: 20px;
+}
+
+.navPrompt p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 20px;
 }

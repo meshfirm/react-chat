@@ -6,6 +6,8 @@ import LoginForm from "./components/login/LoginForm";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
+import FileUpload from "./components/FileUpload";
+
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -27,6 +29,7 @@ function App() {
             </RequireAuth>
           }
         />
+        <Route exact path="upload" element={<FileUpload />} />
         <Route exact path="auth/login" element={<Login />} />
         <Route exact path="login" element={<LoginForm />} />
       </Routes>
