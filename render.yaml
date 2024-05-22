@@ -19,6 +19,7 @@ services:
     region: frankfurt
     buildCommand: cd client && npm install && npm run build
     startCommand: cd /opt/render/project/src/client && npm start
+    staticPublishPath: client/build
     envVars:
       - key: REACT_APP_BACKEND_URL
         value: https://react-chat-backend-xquc.onrender.com
