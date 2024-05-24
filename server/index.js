@@ -21,7 +21,7 @@ app.use(cors());
 // Function to query Flowise
 async function queryFlowise(data) {
     const response = await fetch(
-        "https://copilot-flowise.onrender.com/api/v1/prediction/83ab39b8-dbf8-494f-8be7-8a4ed82f0c34",
+        "https://copilot-flowise.onrender.com/api/v1/prediction/1c651f72-d389-4c14-b9c1-5ba80d97d365",
         {
             method: "POST",
             headers: {
